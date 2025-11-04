@@ -9,12 +9,33 @@ export async function GET() {
     // Check if OpenAI API key is configured
     if (!process.env.OPENAI_API_KEY) {
       console.error("OpenAI API key is missing")
-      return NextResponse.json({ success: false, message: "OpenAI API key is missing" }, { status: 200 })
+      return NextResponse.json({ 
+        success: false, 
+        message: "OpenAI API key is missing",
+        debug: {
+          envVarExists: !!process.env.OPENAI_API_KEY,
+          envVarLength: process.env.OPENAI_API_KEY ? process.env.OPENAI_API_KEY.length : 0,
+          envVarPrefix: process.env.OPENAI_API_KEY ? process.env.OPENAI_API_KEY.substring(0, 6) : "N/A"
+        }
+      }, { status: 200 })
+    }
+    
+    // Check if key is valid (starts with sk-)
+    const apiKey = process.env.OPENAI_API_KEY.trim()
+    if (!apiKey.startsWith('sk-')) {
+      return NextResponse.json({
+        success: false,
+        message: "OpenAI API key format appears invalid (should start with 'sk-')",
+        debug: {
+          keyPrefix: apiKey.substring(0, 6),
+          keyLength: apiKey.length
+        }
+      }, { status: 200 })
     }
 
     // Initialize OpenAI client
     const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
+      apiKey: apiKey, // Use trimmed key
     })
 
     // Test the connection with a simple request
