@@ -50,11 +50,27 @@ npm run start
 ```
 - Default URL: `http://localhost:3000`
 
-## Deploying (Vercel recommended)
+## Deploying
+
+### Option 1: AWS Amplify (Currently Used)
+1. Push this folder to a Git repository (GitHub/GitLab/Bitbucket).
+2. Go to [AWS Amplify Console](https://console.aws.amazon.com/amplify).
+3. Create new app → Connect repository → Select your repo.
+4. Set Environment Variable `OPENAI_API_KEY` in App Settings → Environment Variables.
+5. Deploy. You'll receive a live URL.
+
+**AWS Services Used (Free Tier):**
+- ✅ AWS Amplify Hosting
+- ✅ AWS CloudFront (CDN)
+- ✅ AWS CodeBuild
+
+See [AWS_SERVICES_USED.md](./AWS_SERVICES_USED.md) for complete list of services and free tier limits.
+
+### Option 2: Vercel (Alternative)
 1. Push this folder to a Git repository (GitHub/GitLab/Bitbucket).
 2. Import the repo at `https://vercel.com`.
 3. Set Environment Variable `OPENAI_API_KEY` in Vercel Project Settings.
-4. Deploy. You’ll receive a live URL.
+4. Deploy. You'll receive a live URL.
 
 ## Troubleshooting
 - Port in use: If port 3000 is occupied, Next.js will switch to 3001 automatically. Open the printed URL.
