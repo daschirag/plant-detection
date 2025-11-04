@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 
-// Use Edge runtime to avoid browser environment issues
-export const runtime = "edge"
+// Use nodejs runtime for AWS Amplify compatibility (edge runtime has limited env var access)
+export const runtime = "nodejs"
 
 export async function POST(req: Request) {
   try {

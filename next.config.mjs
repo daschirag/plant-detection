@@ -27,6 +27,10 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  // Explicitly expose environment variables for AWS Amplify
+  env: {
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+  },
 }
 
 if (userConfig) {

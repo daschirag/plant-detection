@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server"
 import { getFallbackResponse } from "../analyze-plant/fallback"
 
-// Explicitly set the runtime to edge
-export const runtime = "edge"
+// Use nodejs runtime for AWS Amplify compatibility (edge runtime has limited env var access)
+export const runtime = "nodejs"
 
 export async function POST(req: Request) {
   try {
